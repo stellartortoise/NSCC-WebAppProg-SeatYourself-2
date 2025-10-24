@@ -1,0 +1,50 @@
+﻿@model List<NSCC_WebAppProg_SeatYourself.Models.Occasion>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h1 class="display-4 text-center">Upcoming Occasions</h1>
+
+<br />
+<br />
+<br />
+
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    
+    @foreach (var occasion in Model)
+    {
+        var venue = occasion.Venue;
+
+        <div class="col e-card">
+            <div class="card text-white h-100 shadow-sm">
+                @if (!String.IsNullOrEmpty(occasion.Filename))
+                {
+                    <img src="/Images/Uploads/@occasion.Filename" class="card-img" alt="@occasion.Title" style="object-fit: cover; height: 100%; filter: brightness(0.3);">
+                }
+                else
+                {
+                    <img src="@venue.ImagePath" class="card-img" alt="@occasion.Title" style="object-fit: cover; height: 100%; filter: brightness(0.3);">
+                }
+                
+
+                <div class="card-img-overlay d-flex flex-column justify-content-between p-4">
+
+                    <div>
+                        @* class="p-3" style="background-color: rgba(0, 0, 0, 0.5); border-radius: 8px;">*@
+                        <h4 class="card-title">@occasion.Title</h4>
+                        <p class="card-text">@occasion.Description</p>
+                        <p class="card-text"><small><strong>Date:</strong> @occasion.Date.ToString("MMMM dd, yyyy")</small></p>
+                        <p class="card-text"><small><strong>Time:</strong> @occasion.Time.ToString("hh:mm tt")</small></p>
+                        <p class="card-text"><small><strong>Location:</strong> @venue.Location</small></p>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <a asp-controller="Occasions" asp-action="Details" asp-route-id="@occasion.OccasionId" class="btn btn-success m-1">View Details</a>
+                        @* <a asp-controller="Tickets" asp-action="Create" asp-route-occasionId="@occasion.OccasionId" class="btn btn-success m-1">Get Tickets</a> *@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

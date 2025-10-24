@@ -1,0 +1,88 @@
+﻿@model NSCC_WebAppProg_SeatYourself.Models.Occasion
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="row justify-content-center">Edit An Occasion</h1>
+
+<h4 class="row justify-content-center">Occasion</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data"> @* added enctype="multipart/form-data" so the image can be saved*@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OccasionId" />
+            <div class="mb-3">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" type="date"/>
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Time" class="control-label"></label>
+                <input asp-for="Time" class="form-control" type="time"/>
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Owner" class="control-label"></label>
+                <input asp-for="Owner" class="form-control" />
+                <span asp-validation-for="Owner" class="text-danger"></span>
+            </div>
+            <!-- Image File-->
+            <div class="mb-3">
+                <div class="card" style="width: 100%; min-height: 200px;">
+                    @if (!string.IsNullOrEmpty(Model.Filename))
+                    {
+                        <img src="/Images/Uploads/@Model.Filename" class="card-img-top" alt="Occasion Image" style="object-fit: contain; max-height: 200px;" />
+                        @* <div class="mt-2 text-secondary">
+                            Current file: @Model.Filename
+                        </div> *@
+                    }
+                    else
+                    {
+                        <div class="card-body text-center text-muted" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                            No image selected
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" />
+                <input type="hidden" asp-for="ImageFile" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="VenueId" class="control-label"></label>
+                <select asp-for="VenueId" class="form-control" asp-items="ViewBag.VenueId"></select>
+                <span asp-validation-for="VenueId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3 text-center">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

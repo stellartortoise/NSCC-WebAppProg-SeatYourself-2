@@ -1,0 +1,17 @@
+﻿@page
+@model NSCC_WebAppProg_SeatYourself.Views.Account.IndexModel
+@{
+}
+
+<h1>Logout</h1>
+
+<p>Are you sure you want to logout?</p>
+
+<form asp-action="LogoutConfirmed" method="post">
+    <p>
+        <input type="submit" value="Logout" class="btn btn-danger"/>
+    </p>
+    <p>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Cancel</a>
+    </p>
+</form>
