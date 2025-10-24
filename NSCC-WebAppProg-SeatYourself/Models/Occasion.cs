@@ -26,7 +26,7 @@ namespace NSCC_WebAppProg_SeatYourself.Models
         //Foreign keys
         [Display(Name = "Venue")]
         public int VenueId { get; set; }
-        [Display(Name = "Occasion")]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         
 
