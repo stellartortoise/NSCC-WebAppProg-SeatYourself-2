@@ -17,6 +17,7 @@
 
         <div class="col e-card">
             <div class="card text-white h-100 shadow-sm">
+                @* 
                 @if (!String.IsNullOrEmpty(occasion.Filename))
                 {
                     <img src="/Images/Uploads/@occasion.Filename" class="card-img" alt="@occasion.Title" style="object-fit: cover; height: 100%; filter: brightness(0.3);">
@@ -24,6 +25,11 @@
                 else
                 {
                     <img src="@venue.ImagePath" class="card-img" alt="@occasion.Title" style="object-fit: cover; height: 100%; filter: brightness(0.3);">
+                }
+                *@
+                @if (!String.IsNullOrEmpty(occasion.Filename))
+                {
+                    <img src="@occasion.Filename" class="card-img" alt="@occasion.Title" style="object-fit: cover; height: 100%; filter: brightness(0.3);" />
                 }
                 
 
