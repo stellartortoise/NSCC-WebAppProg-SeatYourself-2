@@ -88,7 +88,7 @@ namespace NSCC_WebAppProg_SeatYourself.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VenueId,Name,Description,ImagePath,Location,Capacity")] Venue venue)
+        public async Task<IActionResult> Edit(int id, [Bind("VenueId,Name,Description,Location,Capacity")] Venue venue) // got rid of ImagePath from binding
         {
             if (id != venue.VenueId)
             {

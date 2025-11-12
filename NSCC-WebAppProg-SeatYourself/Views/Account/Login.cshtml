@@ -3,8 +3,7 @@
 @{
 }
 
-
-<h1>Login</h1>
+<h1 class="text-center">Login</h1>
 
 @if (ViewBag.ErrorMessage != null)
 {
@@ -13,18 +12,18 @@
     </div>
 }
 
-<form asp-action="Login">
-    <div class="form-group">
-        <label for="Username" class="control-label"></label>
-        <input type="text" id="Username" name="Username" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label for="Password" class="control-label"></label>
-        <input type="text" id="Password" name="Password" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <input type="submit" value="Login" class="btn btn-primary" />
-    </div>
-
-</form>
+<div class="d-flex justify-content-center">
+    <form asp-action="Login" style="width: 300px;">
+        <div class="form-group">
+            <label for="Username" class="control-label"></label>
+            <input type="text" id="Username" name="Username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="Password" class="control-label"></label>
+            <input type="password" id="Password" name="Password" class="form-control" />
+        </div>
+        <div class="form-group text-center" style="margin-top: 1rem;">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                Image
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
@@ -43,17 +46,21 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @if (!string.IsNullOrEmpty(item.Filename))
+                {
+                    <img src="@item.Filename" alt="Occasion Image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;" />
+                }
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @* @Html.DisplayFor(modelItem => item.Date.ToString("MMMM dd, yyyy")) *@
                 @item.Date.ToString("MMMM dd, yyyy")
             </td>
             <td>
-                @* @Html.DisplayFor(modelItem => item.Time.ToString("hh:mm tt")) *@
                 @item.Time.ToString("hh:mm tt")
             </td>
             <td>

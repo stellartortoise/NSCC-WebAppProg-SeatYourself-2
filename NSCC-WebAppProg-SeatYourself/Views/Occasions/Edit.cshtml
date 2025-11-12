@@ -43,10 +43,7 @@
                 <div class="card" style="width: 100%; min-height: 200px;">
                     @if (!string.IsNullOrEmpty(Model.Filename))
                     {
-                        <img src="/Images/Uploads/@Model.Filename" class="card-img-top" alt="Occasion Image" style="object-fit: contain; max-height: 200px;" />
-                        @* <div class="mt-2 text-secondary">
-                            Current file: @Model.Filename
-                        </div> *@
+                        <img src="@Model.Filename" class="card-img-top" alt="Occasion Image" style="object-fit: contain; max-height: 200px;" />
                     }
                     else
                     {

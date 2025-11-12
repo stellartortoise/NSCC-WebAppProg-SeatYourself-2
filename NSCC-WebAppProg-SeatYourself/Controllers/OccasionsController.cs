@@ -156,8 +156,6 @@ namespace NSCC_WebAppProg_SeatYourself.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("OccasionId,Title,Description,Date,Time,Owner,VenueId,CategoryId,ImageFile")] Occasion occasion)
         {
-            //var existingOccasion = await _context.Occasion.FindAsync(id);
-
             if (id != occasion.OccasionId)
             {
                 return NotFound();
@@ -167,48 +165,51 @@ namespace NSCC_WebAppProg_SeatYourself.Controllers
             {
                 try
                 {
-                    //
-                    //Step 1: Image upload code would go here
-                    //
-                    if (occasion.ImageFile != null && occasion.ImageFile.Length > 0)
+                    // Fetch the existing occasion from the database
+                    var existingOccasion = await _context.Occasion.FindAsync(id);
+                    if (existingOccasion == null)
                     {
-                        //string oldFilename = occasion.ImageFile.FileName;
-
-                        // Delete old file if it exists
-                        //if (!string.IsNullOrEmpty(existingOccasion?.Filename))
-                        //{
-                        //    string oldFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "Uploads", existingOccasion.Filename);
-                        //    if (System.IO.File.Exists(oldFilePath))
-                        //    {
-                        //        System.IO.File.Delete(oldFilePath);
-                        //    }
-                        //}
-
-                        //Find old file if it exists
-                        //var existingOccasion = await _context.Occasion.FindAsync(id);
-
-                        // Create a unique filename using a GUID and the original file extension
-                        string filename = Guid.NewGuid().ToString() + Path.GetExtension(occasion.ImageFile.FileName); //ex. guid: 234234-23423-4234234-23423.jpg    
-
-                        // Initialize the filename in the record
-                        occasion.Filename = filename;
-
-                        // Get the file path to save the file (C:\WebAppProg\NSCC-WebAppProg-SeatYourself\NSCC-WebAppProg-SeatYourself\wwwroot\Images\Uploads)
-                        string saveFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "Uploads", filename);
-
-                        //Save file
-                        using (FileStream fileStream = new FileStream(saveFilePath, FileMode.Create))
-                        {
-                            await occasion.ImageFile.CopyToAsync(fileStream);
-                        }
+                        return NotFound();
                     }
 
-                    //
-                    //Step 2: Save to database
-                    //
-                    
-                    occasion.CreatedAt = DateTime.Now; // This will put the edited date/time, to keep the original created date/time it must be put into a variable? leaving this for now
-                    _context.Update(occasion);
+                    // Update scalar properties
+                    existingOccasion.Title = occasion.Title;
+                    existingOccasion.Description = occasion.Description;
+                    existingOccasion.Date = occasion.Date;
+                    existingOccasion.Time = occasion.Time;
+                    existingOccasion.Owner = occasion.Owner;
+                    existingOccasion.VenueId = occasion.VenueId;
+                    existingOccasion.CategoryId = occasion.CategoryId;
+                    existingOccasion.CreatedAt = existingOccasion.CreatedAt; // Keep original created date
+
+                    // Handle image upload if a new file is provided
+                    if (occasion.ImageFile != null && occasion.ImageFile.Length > 0)
+                    {
+                        // Optionally: Delete the old blob if it exists
+                        if (!string.IsNullOrEmpty(existingOccasion.Filename))
+                        {
+                            var oldBlobClient = new BlobClient(_configuration["AzureStorage"], "seat-yourself-uploads", Path.GetFileName(existingOccasion.Filename));
+                            await oldBlobClient.DeleteIfExistsAsync();
+                        }
+
+                        // Upload new image to Azure Blob Storage
+                        string filename = Guid.NewGuid().ToString() + Path.GetExtension(occasion.ImageFile.FileName);
+                        var blobClient = _containerClient.GetBlobClient(filename);
+
+                        using (var stream = occasion.ImageFile.OpenReadStream())
+                        {
+                            await blobClient.UploadAsync(stream, new BlobHttpHeaders
+                            {
+                                ContentType = occasion.ImageFile.ContentType
+                            });
+                        }
+
+                        string blobUrl = blobClient.Uri.ToString();
+                        existingOccasion.Filename = blobUrl;
+                    }
+
+                    // Save changes
+                    _context.Update(existingOccasion);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -257,10 +258,21 @@ namespace NSCC_WebAppProg_SeatYourself.Controllers
             var occasion = await _context.Occasion.FindAsync(id);
             if (occasion != null)
             {
+                // Delete image from Azure Blob Storage if it exists
+                if (!string.IsNullOrEmpty(occasion.Filename))
+                {
+                    // Get the blob name from the URL
+                    var blobUri = new Uri(occasion.Filename);
+                    var blobName = Path.GetFileName(blobUri.LocalPath);
+                    var blobClient = _containerClient.GetBlobClient(blobName);
+                    await blobClient.DeleteIfExistsAsync();
+                }
+
+                // Remove the occasion from the database
                 _context.Occasion.Remove(occasion);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

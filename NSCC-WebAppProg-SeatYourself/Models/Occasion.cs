@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace NSCC_WebAppProg_SeatYourself.Models
 {
@@ -34,8 +35,11 @@ namespace NSCC_WebAppProg_SeatYourself.Models
         public Venue? Venue { get; set; }
         public Category? Category { get; set; }
 
+        public List<Comment>? Comments { get; set; }
+
         [NotMapped]
         [DisplayName("Image")]
+        [Required(ErrorMessage = "An image is required.")]
         public IFormFile? ImageFile { get; set; }
     }
 }
