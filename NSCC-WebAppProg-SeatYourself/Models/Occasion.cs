@@ -36,6 +36,7 @@ namespace NSCC_WebAppProg_SeatYourself.Models
         public Category? Category { get; set; }
 
         public List<Comment>? Comments { get; set; }
+        public List<Purchase>? Purchases { get; set; }
 
         [NotMapped]
         [DisplayName("Image")]
