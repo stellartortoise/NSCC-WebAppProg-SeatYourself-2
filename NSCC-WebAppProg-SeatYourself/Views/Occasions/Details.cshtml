@@ -95,3 +95,47 @@
 <h2>Comments</h2>
 
 @* To-Do: Display comments related to this occasion here. *@
+
+@* Display Purchases Here*@
+
+<h2>Purchases</h2>
+@if (Model.Purchases != null) @*&& Model.Purchases.Any()*@
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tickets</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Credit Card</th>
+                <th>Expiry</th>
+                <th>CVV</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var purchase in Model.Purchases)
+        {
+            <tr>
+                <td>@purchase.NumTicketsOrdered</td>
+                <td>@purchase.CustomerFirstName</td>
+                <td>@purchase.CustomerLastName</td>
+                <td>@purchase.CustomerEmail</td>
+                <td>@purchase.CustomerPhone</td>
+                <td>@purchase.CustomerAddress</td>
+                <td>@purchase.CreditCardNumber</td>
+                <td>@purchase.CreditCardExpiry</td>
+                <td>@purchase.CreditCardCvv</td>
+                <td>@purchase.PurchaseDate.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No purchases for this occasion.</p>
+}

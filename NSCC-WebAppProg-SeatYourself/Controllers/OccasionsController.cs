@@ -49,6 +49,7 @@ namespace NSCC_WebAppProg_SeatYourself.Controllers
             var occasion = await _context.Occasion
                 .Include(o => o.Category)
                 .Include(o => o.Venue)
+                .Include(o => o.Purchases)
                 .FirstOrDefaultAsync(m => m.OccasionId == id);
             if (occasion == null)
             {
