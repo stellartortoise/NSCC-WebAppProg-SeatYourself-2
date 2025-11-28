@@ -45,6 +45,11 @@
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
             <div class="mb-3">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
                 <label asp-for="VenueId" class="control-label"></label>
                 <select asp-for="VenueId" class ="form-control" asp-items="ViewBag.VenueId"></select>
             </div>

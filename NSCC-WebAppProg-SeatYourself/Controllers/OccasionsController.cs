@@ -72,7 +72,7 @@ namespace NSCC_WebAppProg_SeatYourself.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OccasionId,Title,Description,Date,Time,Owner,VenueId,CategoryId,ImageFile")] Occasion occasion)
+        public async Task<IActionResult> Create([Bind("OccasionId,Title,Description,Date,Time,Owner,Price,VenueId,CategoryId,ImageFile")] Occasion occasion)
         {
             occasion.CreatedAt = DateTime.Now;
             if (ModelState.IsValid)
@@ -155,7 +155,7 @@ namespace NSCC_WebAppProg_SeatYourself.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OccasionId,Title,Description,Date,Time,Owner,VenueId,CategoryId,ImageFile")] Occasion occasion)
+        public async Task<IActionResult> Edit(int id, [Bind("OccasionId,Title,Description,Date,Time,Owner,Price,VenueId,CategoryId,ImageFile")] Occasion occasion)
         {
             if (id != occasion.OccasionId)
             {
@@ -179,6 +179,7 @@ namespace NSCC_WebAppProg_SeatYourself.Controllers
                     existingOccasion.Date = occasion.Date;
                     existingOccasion.Time = occasion.Time;
                     existingOccasion.Owner = occasion.Owner;
+                    existingOccasion.Price = occasion.Price;
                     existingOccasion.VenueId = occasion.VenueId;
                     existingOccasion.CategoryId = occasion.CategoryId;
                     existingOccasion.CreatedAt = existingOccasion.CreatedAt; // Keep original created date
