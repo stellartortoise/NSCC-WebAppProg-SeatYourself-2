@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NSCC_WebAppProg_SeatYourself.Data;
 
@@ -11,9 +12,11 @@ using NSCC_WebAppProg_SeatYourself.Data;
 namespace NSCC_WebAppProg_SeatYourself.Migrations
 {
     [DbContext(typeof(NSCC_WebAppProg_SeatYourselfContext))]
-    partial class NSCC_WebAppProg_SeatYourselfContextModelSnapshot : ModelSnapshot
+    [Migration("20251128231730_addedPrice")]
+    partial class addedPrice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

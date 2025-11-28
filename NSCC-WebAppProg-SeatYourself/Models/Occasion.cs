@@ -19,7 +19,8 @@ namespace NSCC_WebAppProg_SeatYourself.Models
         public string Owner { get; set; } = string.Empty;
         [Display(Name = "Created")]
         public DateTime CreatedAt { get; set; }
-        
+        public float Price { get; set; }
+
         // Image Filename
         public string? Filename { get; set; }
 
