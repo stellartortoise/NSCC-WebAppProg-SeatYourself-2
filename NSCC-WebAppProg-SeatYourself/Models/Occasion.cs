@@ -30,7 +30,12 @@ namespace NSCC_WebAppProg_SeatYourself.Models
         public int VenueId { get; set; }
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
-        
+        [Display(Name = "Comment")]
+        public int CommentId { get; set; }
+        [Display(Name = "Purchase")]
+        public int PurchaseId { get; set; }
+
+
 
         //Navigation properties
         public Venue? Venue { get; set; }
