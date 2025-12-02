@@ -25,7 +25,7 @@
                 <p class="mb-1">@occasion.Description</p>
                 <p class="mb-0"><small><strong>Date:</strong> @occasion.Date.ToString("MMMM dd, yyyy")</small></p>
                 <p class="mb-0"><small><strong>Time:</strong> @occasion.Time.ToString("hh:mm tt")</small></p>
-                <p class="mb-0"><small><strong>Location:</strong> @venue.Location</small></p>
+                <p class="mb-0"><small><strong>Location:</strong> @venue?.Location</small></p>
             </div>
             <div class="flex-shrink-0 text-end px-3">
                 <a asp-controller="Occasions" asp-action="Details" asp-route-id="@occasion.OccasionId" class="btn btn-success">View Details</a>

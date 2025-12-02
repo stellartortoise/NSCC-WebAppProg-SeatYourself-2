@@ -76,10 +76,10 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Venue.Name)
+                @Html.DisplayFor(modelItem => item.Venue!.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
+                @Html.DisplayFor(modelItem => item.Category!.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.OccasionId">Edit</a> |
