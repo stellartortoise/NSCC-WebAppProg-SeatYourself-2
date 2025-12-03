@@ -31,9 +31,9 @@ namespace NSCC_WebAppProg_SeatYourself.Models
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
         [Display(Name = "Comment")]
-        //public int CommentId { get; set; }
-        //[Display(Name = "Purchase")]
-        //public int PurchaseId { get; set; }
+        public int? CommentId { get; set; }
+        [Display(Name = "Purchase")]
+        public int? PurchaseId { get; set; }
 
 
 
