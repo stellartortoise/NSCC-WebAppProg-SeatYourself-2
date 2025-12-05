@@ -1,0 +1,53 @@
+﻿@model NSCC_WebAppProg_SeatYourself.Models.Comment
+
+@{
+    ViewData["Title"] = "Comment Details";
+}
+
+<h1 class="text-center">Comment Details</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <h4 class="text-center">Comment</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CommentId)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CommentId)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Author)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Author)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Body)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Body)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CreateDatet)
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.CreateDatet.ToString("yyyy-MM-dd HH:mm")
+                </dd>
+                <dt class="col-sm-2">
+                    Occasion
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Occasion!.Title)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Edit" asp-route-id="@Model?.CommentId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

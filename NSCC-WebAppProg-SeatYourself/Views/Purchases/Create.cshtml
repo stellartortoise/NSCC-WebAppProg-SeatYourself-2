@@ -1,0 +1,79 @@
+﻿@model NSCC_WebAppProg_SeatYourself.Models.Purchase
+
+@{
+    ViewData["Title"] = "Create Purchase";
+}
+
+<h1 class="text-center">Create A Purchase</h1>
+
+<h4 class="row justify-content-center">Purchase</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="NumTicketsOrdered" class="control-label"></label>
+                <input asp-for="NumTicketsOrdered" class="form-control" />
+                <span asp-validation-for="NumTicketsOrdered" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CustomerFirstName" class="control-label"></label>
+                <input asp-for="CustomerFirstName" class="form-control" />
+                <span asp-validation-for="CustomerFirstName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CustomerLastName" class="control-label"></label>
+                <input asp-for="CustomerLastName" class="form-control" />
+                <span asp-validation-for="CustomerLastName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CustomerEmail" class="control-label"></label>
+                <input asp-for="CustomerEmail" class="form-control" type="email" />
+                <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CustomerPhone" class="control-label"></label>
+                <input asp-for="CustomerPhone" class="form-control" type="tel" />
+                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CustomerAddress" class="control-label"></label>
+                <textarea asp-for="CustomerAddress" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CreditCardNumber" class="control-label"></label>
+                <input asp-for="CreditCardNumber" class="form-control" />
+                <span asp-validation-for="CreditCardNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CreditCardExpiry" class="control-label"></label>
+                <input asp-for="CreditCardExpiry" class="form-control" placeholder="MM/YY" />
+                <span asp-validation-for="CreditCardExpiry" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CreditCardCvv" class="control-label"></label>
+                <input asp-for="CreditCardCvv" class="form-control" />
+                <span asp-validation-for="CreditCardCvv" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="OccasionId" class="control-label">Occasion</label>
+                <select asp-for="OccasionId" class="form-control" asp-items="ViewBag.OccasionId"></select>
+                <span asp-validation-for="OccasionId" class="text-danger"></span>
+            </div>
+            <div class="mb-3 text-center">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

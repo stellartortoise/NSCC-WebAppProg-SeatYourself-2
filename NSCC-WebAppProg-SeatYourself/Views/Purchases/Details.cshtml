@@ -1,0 +1,95 @@
+﻿@model NSCC_WebAppProg_SeatYourself.Models.Purchase
+
+@{
+    ViewData["Title"] = "Purchase Details";
+}
+
+<h1 class="text-center">Purchase Details</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <h4 class="text-center">Purchase</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.PurchaseId)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.PurchaseId)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.NumTicketsOrdered)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.NumTicketsOrdered)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CustomerFirstName)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.CustomerFirstName)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CustomerLastName)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.CustomerLastName)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CustomerEmail)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.CustomerEmail)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CustomerPhone)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.CustomerPhone)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CustomerAddress)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.CustomerAddress)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CreditCardNumber)
+                </dt>
+                <dd class="col-sm-8">
+                    @("**** **** **** " + Model.CreditCardNumber!.Substring(Model.CreditCardNumber.Length - 4))
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CreditCardExpiry)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.CreditCardExpiry)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CreditCardCvv)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.CreditCardCvv)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.PurchaseDate)
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.PurchaseDate.ToString("yyyy-MM-dd")
+                </dd>
+                <dt class="col-sm-4">
+                    Occasion
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Occasion!.Title)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Edit" asp-route-id="@Model?.PurchaseId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

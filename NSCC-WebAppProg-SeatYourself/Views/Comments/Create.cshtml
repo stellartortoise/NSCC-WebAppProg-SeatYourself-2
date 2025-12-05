@@ -1,0 +1,44 @@
+﻿@model NSCC_WebAppProg_SeatYourself.Models.Comment
+
+@{
+    ViewData["Title"] = "Create Comment";
+}
+
+<h1 class="text-center">Create A Comment</h1>
+
+<h4 class="row justify-content-center">Comment</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Author" class="control-label"></label>
+                <input asp-for="Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Body" class="control-label"></label>
+                <textarea asp-for="Body" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Body" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="OccasionId" class="control-label">Occasion</label>
+                <select asp-for="OccasionId" class="form-control" asp-items="ViewBag.OccasionId"></select>
+                <span asp-validation-for="OccasionId" class="text-danger"></span>
+            </div>
+            <div class="mb-3 text-center">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
