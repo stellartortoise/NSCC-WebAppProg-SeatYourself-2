@@ -1,0 +1,101 @@
+﻿@model IEnumerable<NSCC_WebAppProg_SeatYourself.Models.Purchase>
+
+@{
+    ViewData["Title"] = "Purchases";
+}
+
+<h1 class="text-center">Occasions</h1>
+
+<p class="text-center">
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumTicketsOrdered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreditCardNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreditCardExpiry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreditCardCvv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OccasionId)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumTicketsOrdered)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerAddress)
+                </td>
+                <td>
+                    @("**** **** **** " + item.CreditCardNumber!.Substring(item.CreditCardNumber.Length - 4))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreditCardExpiry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreditCardCvv)
+                </td>
+                <td>
+                    @item.PurchaseDate.ToString("yyyy-MM-dd")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Occasion!.Title)
+                </td>
+                <td>
+                    @* <a asp-action="Edit" asp-route-id="@item.PurchaseId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PurchaseId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PurchaseId">Delete</a> *@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
